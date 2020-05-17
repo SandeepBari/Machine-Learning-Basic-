@@ -4,7 +4,7 @@ clc;
 clear all;
 close all;
  
-b= load ('carsmall.txt');
+b= load ('Cars Data Set.txt');
 y = b(:,3);
 x = b(:,2);
 isdata = isfinite(y)&isfinite(x)
