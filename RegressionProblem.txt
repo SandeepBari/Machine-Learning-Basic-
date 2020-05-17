@@ -1,0 +1,21 @@
+clc;
+clear all;
+close all;
+ 
+b= load ('carsmall.txt');
+y = b(:,3);
+x = b(:,2);
+isdata = isfinite(y)&isfinite(x)
+x = x(isdata); 
+y = y(isdata); 
+N = length(y);
+ 
+subplot(2,2,1)
+plot(x,y,'x')
+xlabel('Weight')
+ylabel('Miles per Gallin’)
+hold on
+ 
+X = [x ones(N,1)];
+a = regress(y,X);
+plot(x,X*a,'r-');
