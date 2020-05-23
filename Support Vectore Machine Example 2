@@ -1,0 +1,34 @@
+clc;
+clear all;
+close all;
+ 
+load fisheriris;
+x=meas(:,3:4);
+y=species;
+ 
+figure;
+gscatter(x(:,1),x(:,2),y);
+title('{bf Scatter Diagram of Iris Measurement}');
+ 
+SVMModels=cell(3,1);
+classes=unique(y);
+ 
+for j= 1:numel(classes)
+    indx=strcmp(y,classes(j));
+    SVMModels{j}=fitcsvm(x,indx);
+end
+ 
+%prediction
+xnew=[2.5,0.4]; 
+ 
+scores=zeros(1,numel(classes));
+scores=zeros(1,3);
+ 
+for j= 1: numel(classes);
+    [~,scores]=predict(SVMModels{j},xnew);
+    scores(:,j)=scores(:,2);
+end
+ 
+index= find(scores==max(scores));
+outputclass=index;
+disp(classes(outputclass));
